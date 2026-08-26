@@ -3,4 +3,4 @@ project(ProgrammingAssignment2)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(ProgrammingAssignment2 count_substring_starts_and_ends_with_1.cpp)
+add_executable(ProgrammingAssignment2 has_binary_string_most_one_segment_of_ones.cpp)
