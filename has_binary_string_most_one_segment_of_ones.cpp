@@ -1,28 +1,37 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 int main() {
-    std::string S;
-    std::cout << "enter the binary string: ";
-    std::cin >> S;
+    int N;
+    string S;
+    
+    // Read the inputs exactly as the problem specifies
+    cin >> N;
+    cin >> S;
 
-    // S = "1110000";
-    // S = "0001110000";
-    // S = "00000111";
-    // S = "1001";
+    bool seen_one = false;
+    bool segment_ended = false;
 
-    int count = 0;
-
-    for (int i = 0; i < S.length(); i++) {
+    for (int i = 0; i < N; i++) {
         if (S[i] == '1') {
-            if (i == 0 || S[i - 1] == '0') {
-                count++;
+            // If we see a '1' AFTER a segment has already ended, it's invalid.
+            if (segment_ended) {
+                cout << "false" << endl;
+                return 0; // Stop the program immediately
+            }
+            seen_one = true; // Mark that we are currently inside a segment of 1s
+        } 
+        else if (S[i] == '0') {
+            // If we see a '0', AND we've previously seen a '1', the segment is over.
+            if (seen_one) {
+                segment_ended = true;
             }
         }
     }
 
-    if (count >= 2) std::cout << "false";
-    else std::cout << "true";
-
+    // If the loop finishes without returning false, the string is valid.
+    cout << "true" << endl;
     return 0;
 }
